@@ -25,7 +25,8 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     })
     ],
     publicDir: "public",
-    base: "./",
+    // base: "./",
+    base: "/HisFdp/",
     server: {
       host: '0.0.0.0',
       port: 8112,
