@@ -49,8 +49,8 @@ function montionFilter(val: any) {
   // console.log(val);
   return val ? Number(val).toFixed(2) : "--";
 }
-const handleAddress = (item: any) => {
-  return `${item.provinceName}/${item.cityName}/${item.countyName}`;
+const handleNsName = (item: any) => {
+  return item.nsName;
 };
 onMounted(() => {
   getData();
@@ -77,36 +77,36 @@ onMounted(() => {
             <div class="dibu"></div>
             <div class="flex">
               <div class="info">
-                <span class="labels">设备ID：</span>
-                <span class="text-content zhuyao"> {{ item.gatewayno }}</span>
+                <span class="labels">病患：</span>
+                <span class="text-content zhuyao"> {{ item.patient }}</span>
               </div>
               <div class="info">
-                <span class="labels">型号：</span>
-                <span class="text-content"> {{ item.terminalno }}</span>
+                <span class="labels">年齡：</span>
+                <span class="text-content"> {{ item.age }}</span>
               </div>
               <div class="info">
-                <span class="labels">告警值：</span>
-                <span class="text-content warning"> {{ montionFilter(item.alertvalue) }}</span>
+                <span class="labels">危險數值：</span>
+                <span class="text-content warning"> {{ montionFilter(item.alertValue) }}</span>
               </div>
             </div>
 
             <div class="flex">
               <div class="info">
-                <span class="labels shrink-0"> 地址：</span>
-                <span class="ciyao truncate" style="font-size: 12px; width: 220px" :title="handleAddress(item)">
-                  {{ handleAddress(item) }}</span
+                <span class="labels shrink-0"> 護理站：</span>
+                <span class="ciyao truncate" style="font-size: 12px; width: 220px" :title="handleNsName(item)">
+                  {{ handleNsName(item) }}</span
                 >
               </div>
               <div class="info time shrink-0">
                 <span class="labels">时间：</span>
-                <span class="text-content" style="font-size: 12px"> {{ item.createtime }}</span>
+                <span class="text-content" style="font-size: 12px"> {{ item.createTime }}</span>
               </div>
             </div>
             <div class="flex">
               <div class="info">
-                <span class="labels">門診内容：</span>
-                <span class="text-content ciyao" :class="{ warning: item.alertdetail }">
-                  {{ item.alertdetail || "无" }}</span
+                <span class="labels">警示訊息：</span>
+                <span class="text-content ciyao" :class="{ warning: item.alertDetail }">
+                  {{ item.alertDetail || "無" }}</span
                 >
               </div>
             </div>

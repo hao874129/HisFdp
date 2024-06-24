@@ -42,14 +42,14 @@ const indexRadioChange=(flag: boolean)=>{
 <template>
   <el-drawer v-model="settingStore.settingShow" direction="rtl" size="360px">
     <template #header>
-      <h2 class="setting-title">设置</h2>
+      <h2 class="setting-title">設定</h2>
     </template>
     <template #default>
-      <div class="left_shu">全局设置</div>
+      <div class="left_shu">全局設定</div>
       <div class="setting_item">
         <span class="setting_label">
-          是否进行自动适配<span class="setting_label_tip"
-            >(默认分辨率1920*1080)</span
+          是否進行自動響應式<span class="setting_label_tip"
+            >(默認1920*1080)</span
           >:
         </span>
         <div class="setting_content">
@@ -59,10 +59,10 @@ const indexRadioChange=(flag: boolean)=>{
           </el-radio-group>
         </div>
       </div>
-      <div class="left_shu">实时监测</div>
+      <div class="left_shu">自動輪播</div>
       <div class="setting_item">
         <span class="setting_label">
-          设备提醒自动轮询: <span class="setting_label_tip"></span>
+          院內即時推播 - 自動輪播: <span class="setting_label_tip"></span>
         </span>
         <div class="setting_content">
           <el-radio-group
@@ -75,7 +75,7 @@ const indexRadioChange=(flag: boolean)=>{
         </div>
       </div>
       <div class="setting_item">
-        <span class="setting_label"> 实时预警轮播: </span>
+        <span class="setting_label"> ICU即時監控 - 自動輪播: </span>
         <div class="setting_content">
           <el-radio-group
             v-model="rightBottomRadio"

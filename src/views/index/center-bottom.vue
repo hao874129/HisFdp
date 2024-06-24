@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, nextTick } from "vue";
-import { installationPlan } from "@/api";
+import { opdInfo } from "@/api";
 import { graphic } from "echarts/core";
 import { ElMessage } from "element-plus";
 
 const option = ref({});
 const getData = () => {
-  installationPlan()
+  opdInfo()
     .then((res) => {
-      console.log("中下--安装计划", res);
+      console.log("中下--門診資訊", res);
       if (res.success) {
         setOption(res.data);
       } else {
@@ -32,14 +32,14 @@ const setOption = async (newData: any) => {
         color: "#FFF",
       },
       formatter: function (params: any) {
-        // 添加单位
+        // 添加單位
         var result = params[0].name + "<br>";
         params.forEach(function (item: any) {
           if (item.value) {
-            if (item.seriesName == "安装率") {
+            if (item.seriesName == "看診率") {
               result += item.marker + " " + item.seriesName + " : " + item.value + "%</br>";
             } else {
-              result += item.marker + " " + item.seriesName + " : " + item.value + "个</br>";
+              result += item.marker + " " + item.seriesName + " : " + item.value + "位</br>";
             }
           } else {
             result += item.marker + " " + item.seriesName + " :  - </br>";
@@ -49,7 +49,7 @@ const setOption = async (newData: any) => {
       },
     },
     legend: {
-      data: ["已安装", "计划安装", "安装率"],
+      data: ["完成看診", "預計看診人數", "看診率"],
       textStyle: {
         color: "#B4B4B4",
       },
@@ -99,7 +99,7 @@ const setOption = async (newData: any) => {
     ],
     series: [
       {
-        name: "已安装",
+        name: "完成看診",
         type: "bar",
         barWidth: 10,
         itemStyle: {
@@ -112,7 +112,7 @@ const setOption = async (newData: any) => {
         data: newData.barData,
       },
       {
-        name: "计划安装",
+        name: "預計看診人數",
         type: "bar",
         barGap: "-100%",
         barWidth: 10,
@@ -128,7 +128,7 @@ const setOption = async (newData: any) => {
         data: newData.lineData,
       },
       {
-        name: "安装率",
+        name: "看診率",
         type: "line",
         smooth: true,
         showAllSymbol: true,

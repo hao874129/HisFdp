@@ -26,7 +26,7 @@ import RightBottom from "./right-bottom.vue";
       </ItemWrap>
       <ItemWrap
         class="contetn_left-bottom contetn_lr-item"
-        title="设备提醒"
+        title="院內即時推播"
         style="padding: 0 10px 16px 10px"
       >
         <LeftBottom />
@@ -36,12 +36,12 @@ import RightBottom from "./right-bottom.vue";
 
       <!-- <CenterMap class="contetn_center_top" title="设备分布图" /> -->
       <CenterPortal class="contetn_center_top" title="入口" />
-      <ItemWrap class="contetn_center-bottom" title="安装计划">
+      <ItemWrap class="contetn_center-bottom" title="門診資訊">
         <CenterBottom />
       </ItemWrap>
     </div>
     <div class="contetn_right">
-      <ItemWrap class="contetn_left-bottom contetn_lr-item" title="門診次数">
+      <ItemWrap class="contetn_left-bottom contetn_lr-item" title="預防醫療">
         <RightTop />
       </ItemWrap>
       <ItemWrap
@@ -51,7 +51,7 @@ import RightBottom from "./right-bottom.vue";
       >
         <RightCenter />
       </ItemWrap>
-      <ItemWrap class="contetn_left-bottom contetn_lr-item" title="数据统计图 ">
+      <ItemWrap class="contetn_left-bottom contetn_lr-item" title="ICU即時監控 ">
         <RightBottom />
       </ItemWrap>
     </div>

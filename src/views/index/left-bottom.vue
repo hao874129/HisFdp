@@ -22,7 +22,7 @@ const state = reactive<any>({
 const getData = () => {
   leftBottom( { limitNum: 20 })
     .then((res) => {
-      console.log("左下--设备提醒", res);
+      console.log("左下--院內即時推播", res);
       if (res.success) {
         state.list = res.data.list;
       } else {
@@ -36,15 +36,8 @@ const getData = () => {
       ElMessage.error(err);
     });
 };
-const addressHandle = (item: any) => {
-  let name = item.provinceName;
-  if (item.cityName) {
-    name += "/" + item.cityName;
-    if (item.countyName) {
-      name += "/" + item.countyName;
-    }
-  }
-  return name;
+const messageHandle = (item: any) => {
+  return item.message;
 };
 const comName = computed(() => {
   if (indexConfig.value.leftBottomSwiper) {
@@ -78,11 +71,11 @@ onMounted(() => {
             <div class="dibu"></div>
             <div class="flex">
               <div class="info">
-                <span class="labels">设备ID：</span>
-                <span class="text-content zhuyao doudong wangguan"> {{ item.gatewayno }}</span>
+                <span class="labels">發送者：</span>
+                <span class="text-content zhuyao doudong wangguan"> {{ item.sender }}</span>
               </div>
               <div class="info">
-                <span class="labels">时间：</span>
+                <span class="labels">時間：</span>
                 <span class="text-content" style="font-size: 12px"> {{ item.createTime }}</span>
               </div>
             </div>
@@ -93,12 +86,12 @@ onMounted(() => {
                 typeRed: item.onlineState == 0,
                 typeGreen: item.onlineState == 1,
               }"
-              >{{ item.onlineState == 1 ? "上线" : "下线" }}</span
+              >{{ item.onlineState == 1 ? "通知" : "警急" }}</span
             >
 
-            <div class="info addresswrap">
-              <span class="labels">地址：</span>
-              <span class="text-content ciyao" style="font-size: 12px"> {{ addressHandle(item) }}</span>
+            <div class="info messageWrap">
+              <span class="labels">訊息：</span>
+              <span class="text-content ciyao" style="font-size: 12px"> {{ messageHandle(item) }}</span>
             </div>
           </div>
         </li>
@@ -184,7 +177,7 @@ onMounted(() => {
         left: -2%;
         background-size: cover;
       }
-      .addresswrap {
+      .messageWrap {
         width: 100%;
         display: flex;
         margin-top: 8px;

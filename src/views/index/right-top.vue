@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { alarmNum } from "@/api";
+import { preventCare } from "@/api";
 import { graphic } from "echarts/core";
 import { ElMessage } from "element-plus";
 
 const option = ref({});
 const getData = () => {
-  alarmNum()
+  preventCare()
     .then((res) => {
-      console.log("右上--門診次数 ", res);
+      console.log("右上--預防醫療 ", res);
       if (res.success) {
         setOption(res.data.dateList, res.data.numList, res.data.numList2);
       } else {
@@ -87,7 +87,7 @@ const setOption = async (xData: any[], yData: any[], yData2: any[]) => {
         type: "line",
         smooth: true,
         symbol: "none", //去除点
-        name: "門診1次数",
+        name: "總健檢人數",
         color: "rgba(252,144,16,.7)",
         areaStyle: {
           //右，下，左，上
@@ -128,7 +128,7 @@ const setOption = async (xData: any[], yData: any[], yData2: any[]) => {
                 padding: [7, 14],
                 borderWidth: 0.5,
                 borderColor: "rgba(252,144,16,.5)",
-                formatter: "門診1：{c}",
+                formatter: "總健檢人數：{c}",
               },
             },
             {
@@ -154,7 +154,7 @@ const setOption = async (xData: any[], yData: any[], yData2: any[]) => {
         type: "line",
         smooth: true,
         symbol: "none", //去除点
-        name: "門診2次数",
+        name: "三年以上持續健檢人數",
         color: "rgba(9,202,243,.7)",
         areaStyle: {
           //右，下，左，上
@@ -195,7 +195,7 @@ const setOption = async (xData: any[], yData: any[], yData2: any[]) => {
                 borderRadius: 6,
                 borderColor: "rgba(9,202,243,.5)",
                 padding: [7, 14],
-                formatter: "門診2：{c}",
+                formatter: "三年以上持續健檢人數：{c}",
                 borderWidth: 0.5,
               },
             },

@@ -6,21 +6,15 @@
     >
       <img
         src="@/assets/img/center.gif"
-        style="
-          position: absolute;
-          top: 20px;
-          left: 5%;
-          width: 90%;
-          height: 100%;
-        "
+        style="position: absolute; top: 50px; width: 100%; height: 128%"
       />
       <img
         src="@/assets/img/normal_bg.png"
         :style="{ opacity: 100 }"
         style="
           position: absolute;
-          top: 320px;
-          left: 220px;
+          top: 480px;
+          left: 222px;
           width: 250px;
           height: 170px;
         "
@@ -53,7 +47,7 @@
         <div
           @mouseenter="onmouseenter"
           @mouseleave="onmouseleave"
-          :id="'title_' + (index + 1)"
+          :id="`${index + 1}`"
           :style="{
             backgroundImage: item.isHover
               ? `url(${images.sensitiveTitle})`
@@ -61,7 +55,7 @@
             position: 'absolute',
             top: item.pos.y + 'px',
             left: item.pos.x + 'px',
-            width: '100px',
+            width: '160px',
             height: 'auto',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
@@ -80,8 +74,8 @@
           v-show="item.isHover"
           :style="{
             position: 'absolute',
-            top: '320px',
-            left: '250px',
+            top: '480px',
+            left: '222px',
             width: '250px',
             height: '170px',
           }"
@@ -91,8 +85,7 @@
           <div class="text-box">
             <div class="promptBox">
               <div class="promptTitle">{{ item.title }}</div>
-              <div class="psychologyContent">{{ item.describe }}
-              </div>
+              <div class="psychologyContent">{{ item.describe }}</div>
             </div>
           </div>
         </div>
@@ -122,75 +115,130 @@ const hoverObject = ref(0);
 const swiperData = reactive([
   {
     isHover: false,
-    title: "標題一",
+    title: "1.門診就診人數",
     pos: {
-      x: 85,
-      y: 354,
+      x: 43,
+      y: 554,
     },
-    describe: "描述一",
+    describe: "this is 門診就診人數 description...",
   },
   {
     isHover: false,
-    title: "標題二",
+    title: "2.門診初診率",
+    pos: {
+      x: 18,
+      y: 460,
+    },
+    describe: "this is 門診初診率 description...",
+  },
+  {
+    isHover: false,
+    title: "3.門診病人住院率",
+    pos: {
+      x: 18,
+      y: 364,
+    },
+    describe: "this is 門診病人住院率 description...",
+  },
+  {
+    isHover: false,
+    title: "4.門診藥費點數佔總醫療費用點數之比率",
+    pos: {
+      x: 18,
+      y: 268,
+    },
+    describe: "this is 門診藥費點數佔總醫療費用點數之比率 description...",
+  },
+  {
+    isHover: false,
+    title: "5.門診健保申報醫療費用點數成長率",
+    pos: {
+      x: 38,
+      y: 170,
+    },
+    describe: "this is 門診健保申報醫療費用點數成長率 description...",
+  },
+  {
+    isHover: false,
+    title: "6.門診健保申報平均每件診療點數",
     pos: {
       x: 58,
-      y: 224,
+      y: 70,
     },
-    describe: "描述二",
+    describe: "this is 門診健保申報平均每件診療點數 description...",
   },
   {
     isHover: false,
-    title: "標題三",
+    title: "7.一般急診病房平均住院天數",
     pos: {
-      x: 87,
-      y: 110,
+      x: 268,
+      y: 20,
     },
-    describe: "描述三",
+    describe: "this is 一般急診病房平均住院天數 description...",
   },
   {
     isHover: false,
-    title: "標題四",
+    title: "8.平均住院日",
     pos: {
-      x: 284,
-      y: 16,
+      x: 478,
+      y: 70,
     },
-    describe: "描述四",
+    describe: "this is 平均住院日 description...",
   },
   {
     isHover: false,
-    title: "標題五",
+    title: "9.住院佔床率",
     pos: {
-      x: 502,
-      y: 110,
+      x: 498,
+      y: 170,
     },
-    describe: "描述五",
+    describe: "this is 住院佔床率 description...",
   },
   {
     isHover: false,
-    title: "標題六",
-    pos: {
-      x: 540,
-      y: 224,
-    },
-    describe: "描述六",
-  },
-  {
-    isHover: false,
-    title: "標題七",
+    title: "10.總出院人次",
     pos: {
       x: 518,
-      y: 354,
+      y: 268,
     },
-    describe: "描述七",
+    describe: "this is 總出院人次 description...",
+  },
+  {
+    isHover: false,
+    title: "11.十四日非計畫再住院人次",
+    pos: {
+      x: 518,
+      y: 364,
+    },
+    describe: "this is 十四日非計畫再住院人次 description...",
+  },
+  {
+    isHover: false,
+    title: "12.住院健保申報醫療費用點數成長率",
+    pos: {
+      x: 518,
+      y: 460,
+    },
+    describe: "this is 住院健保申報醫療費用點數成長率 description...",
+  },
+  {
+    isHover: false,
+    title: "13.部醫戰情數據上傳",
+    pos: {
+      x: 493,
+      y: 554,
+    },
+    describe: "this is 部醫戰情數據上傳 description...",
   },
 ]);
 
 const textBox = ref([]);
 
 const onmouseenter = (e: any) => {
-  const targetObjId = Number(
-    e.currentTarget.id.substr(e.currentTarget.id.length - 1, 1)
-  );
+  // const targetObjId = Number(
+  //   e.currentTarget.id.substr(e.currentTarget.id.length - 1, 1)
+  // );
+  const targetObjId = Number(e.currentTarget.id);
   hoverAnimation(targetObjId);
   hoverObject.value = targetObjId;
 };
@@ -226,11 +274,14 @@ const hoverAnimation = (i: number) => {
       cursor: pointer;
 
       .title-text-box {
+        padding: 8px 16px;
         background: rgba(0, 0, 0, 0);
         justify-content: center;
         align-items: center;
-        display: -webkit-flex;
+        display: flex;
         height: 100%;
+        word-wrap: break-word; /* 允許在單詞內換行 */
+        word-break: break-all; /* 強制在單詞內换行 */
 
         p {
           width: 100%;

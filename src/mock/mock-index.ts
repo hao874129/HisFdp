@@ -25,19 +25,18 @@ function RandomNumBoth(Min: any, Max: any) {
 //左中
 export default [
     {
-        url: "/bigscreen/countUserNum",
+        url: "/bigscreen/opData",
         type: "get",
         response: () => {
             const a = Mock.mock({
                 success: true,
                 data: {
-                    offlineNum: '@integer(50, 100)',
-                    alarmNum: '@integer(20, 100)',
-                    lockNum: '@integer(10, 50)',
-                    totalNum: 368
+                    completed: '@integer(50, 100)',
+                    inProgress: '@integer(20, 50)',
+                    notStarted: '@integer(10, 50)',
                 }
             })
-            a.data.onlineNum = a.data.totalNum - a.data.offlineNum - a.data.lockNum - a.data.alarmNum
+            a.data.totalNum = a.data.completed + a.data.inProgress + a.data.notStarted
             return a
         },
     },
@@ -67,14 +66,11 @@ export default [
                 data: {
                     "list|20": [
                         {
-                            provinceName: "@province()",
-                            cityName: '@city()',
-                            countyName: "@county()",
-                            createTime: "@datetime('yyyy-MM-dd HH:mm:ss')",
+                            sender: "@first()",
+                            message: "@title(3, 6)",
+                            createTime: "@dateTime('yyyy-MM-dd HH:mm:ss')",
                             deviceId: "6c512d754bbcd6d7cd86abce0e0cac58",
-                            "gatewayno|+1": 10000,
                             "onlineState|1": [0, 1],
-
                         }
                     ]
                 }
@@ -84,18 +80,18 @@ export default [
     },
     //右上
     {
-        url: "/bigscreen/alarmNum",
+        url: "/bigscreen/preventCare",
         type: "get",
         response: () => {
             const a = Mock.mock({
                 success: true,
                 data: {
-                    dateList: ['2021-11', '2021-12', '2022-01', '2022-02', '2022-03', "2022-04"],
+                    dateList: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', "2024-06"],
                     "numList|6": [
-                        '@integer(0, 1000)'
+                        '@integer(400, 600)'
                     ],
                     "numList2|6": [
-                        '@integer(0, 1000)'
+                        '@integer(200, 300)'
                     ]
                 }
             })
@@ -107,18 +103,28 @@ export default [
         url: "/bigscreen/ranking",
         type: "get",
         response: () => {
-            let num = Mock.mock({ "list|80": [{ value: "@integer(50,1000)", name: "@city()" }] }).list
-            //   console.log("ranking",num);
-            let newNum: any = [], numObj: any = {}
-            num.map((item: any) => {
-                if (!numObj[item.name] && newNum.length < 8) {
-                    numObj[item.name] = true
-                    newNum.push(item)
-                }
-            })
-            let arr = newNum.sort((a: any, b: any) => {
-                return b.value - a.value
-            })
+            // let num = Mock.mock({ "list|20": [{ value: "@integer(50,1000)", name: "@city()" }] }).list
+            // //   console.log("ranking",num);
+            // let newNum: any = [], numObj: any = {}
+            // num.map((item: any) => {
+            //     if (!numObj[item.name] && newNum.length < 8) {
+            //         numObj[item.name] = true
+            //         newNum.push(item)
+            //     }
+            // })
+            // let arr = newNum.sort((a: any, b: any) => {
+            //     return b.value - a.value
+            // })
+            let arr = [
+                { value: 430, name: "骨科" },
+                { value: 380, name: "心血管內科" },
+                { value: 362, name: "腫瘤科" },
+                { value: 359, name: "普通外科" },
+                { value: 287, name: "消化科" },
+                { value: 232, name: "婦產科" },
+                { value: 198, name: "神經外科" },
+                { value: 112, name: "皮膚科" },
+            ]
             let a = {
                 success: true,
                 data: arr
@@ -135,18 +141,12 @@ export default [
                 success: true,
                 data: {
                     "list|40": [{
-                        alertdetail: "@csentence(5,10)",
-                        "alertname|1": ["水浸告警", "各種門診"],
-                        alertvalue: "@float(60, 200)",
-                        createtime: "2022-04-19 08:38:33",
-                        deviceid: null,
-                        "gatewayno|+1": 10000,
-                        phase: "A1",
-                        sbInfo: "@csentence(10,18)",
-                        "terminalno|+1": 100,
-                        provinceName: "@province()",
-                        cityName: '@city()',
-                        countyName: "@county()",
+                        patient: "@first()",
+                        "age|1-100": 100,
+                        alertValue: "@float(60, 200)",
+                        nsName: "XXX護理站",
+                        createTime: "@dateTime('yyyy-MM-dd HH:mm:ss')",
+                        alertDetail: "@title(0, 6)",
                     }],
 
                 }
@@ -154,15 +154,15 @@ export default [
             return a
         }
     },
-    //安装计划
+    //門診資訊
     {
-        url: "/bigscreen/installationPlan",
+        url: "/bigscreen/opdInfo",
         type: "get",
         response: () => {
 
             let num = RandomNumBoth(26, 32);
             const a = Mock.mock({
-                ["category|" + num]: ["@city()"],
+                ["category|" + num]: ["@title(1,1)"],
                 ["barData|" + num]: ["@integer(10, 100)"],
             })
             let lineData = [], rateData = [];

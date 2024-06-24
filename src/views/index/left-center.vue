@@ -5,16 +5,15 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import { graphic } from "echarts/core";
-import { countUserNum } from "@/api";
+import { opData } from "@/api";
 import {ElMessage} from "element-plus"
 
 let colors = ["#0BFC7F", "#A0A0A0", "#F48C02", "#F4023C"];
 const option = ref({});
 const state = reactive({
-  lockNum: 0,
-  offlineNum: 0,
-  onlineNum: 0,
-  alarmNum: 0,
+  notStarted: 0,
+  completed: 0,
+  inProgress: 0,
   totalNum: 0,
 });
 const echartsGraphic = (colors: string[]) => {
@@ -24,14 +23,13 @@ const echartsGraphic = (colors: string[]) => {
   ]);
 };
 const getData = () => {
-  countUserNum().then((res) => {
+  opData().then((res) => {
     console.log("左中--手術服務",res);
     if (res.success) {
-      state.lockNum = res.data.lockNum;
-      state.offlineNum = res.data.offlineNum;
-      state.onlineNum = res.data.onlineNum;
+      state.notStarted = res.data.notStarted;
+      state.completed = res.data.completed;
       state.totalNum = res.data.totalNum;
-      state.alarmNum = res.data.alarmNum;
+      state.inProgress = res.data.inProgress;
       setOption();
     }else{
       ElMessage.error(res.msg)
@@ -46,7 +44,7 @@ const setOption = () => {
     title: {
       top: "center",
       left: "center",
-      text: [`{value|${state.totalNum}}`, "{name|总数}"].join("\n"),
+      text: [`{value|${state.totalNum}}`, "{name|今日預計檯數}"].join("\n"),
       textStyle: {
         rich: {
           value: {
@@ -80,7 +78,7 @@ const setOption = () => {
         color: colors,
         label: {
           show: true,
-          formatter: "   {b|{b}}   \n   {c|{c}个}   {per|{d}%}  ",
+          formatter: "   {b|{b}}   \n   {c|{c}檯}   {per|{d}%}  ",
           //   position: "outside",
           rich: {
             b: {
@@ -108,36 +106,29 @@ const setOption = () => {
 
         labelLine: {
           show: true,
-          length: 20, // 第一段线 长度
-          length2: 36, // 第二段线 长度
+          length: 20, // 第一段線 長度
+          length2: 36, // 第二段線 長度
           smooth: 0.2,
           lineStyle: {},
         },
         data: [
           {
-            value: state.onlineNum,
-            name: "在线",
+            value: state.completed,
+            name: "已完成",
             itemStyle: {
               color: echartsGraphic(["#0BFC7F", "#A3FDE0"]),
             },
           },
           {
-            value: state.offlineNum,
-            name: "离线",
-            itemStyle: {
-              color: echartsGraphic(["#A0A0A0", "#DBDFDD"]),
-            },
-          },
-          {
-            value: state.lockNum,
-            name: "锁定",
+            value: state.notStarted,
+            name: "待進行",
             itemStyle: {
               color: echartsGraphic(["#F48C02", "#FDDB7D"]),
             },
           },
           {
-            value: state.alarmNum,
-            name: "异常",
+            value: state.inProgress,
+            name: "進行中",
             itemStyle: {
               color: echartsGraphic(["#F4023C", "#FB6CB7"]),
             },
