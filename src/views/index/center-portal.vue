@@ -169,12 +169,12 @@ const swiperData = reactive([
   },
   {
     isHover: false,
-    title: "7.一般急診病房平均住院天數",
+    title: "7.一般急性病房平均住院天數",
     pos: {
       x: 268,
       y: 20,
     },
-    describe: "this is 一般急診病房平均住院天數 description...",
+    describe: "this is 一般急性病房平均住院天數 description...",
   },
   {
     isHover: false,

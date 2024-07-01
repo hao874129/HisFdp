@@ -1,27 +1,3 @@
-<script setup lang="ts">
-import { reactive } from "vue";
-import dayjs from 'dayjs';
-import type {DateDataType} from "./index.d"
-import {useSettingStore} from "@/stores/index"
-
-const dateData = reactive<DateDataType>({
-  dateDay: "",
-  dateYear: "",
-  dateWeek: "",
-  timing:null
-});
-
-const { setSettingShow} =useSettingStore()
-const weekday= ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
-const timeFn = () => {
-  dateData.timing = setInterval(() => {
-    dateData.dateDay = dayjs().format("YYYY-MM-DD hh : mm : ss");
-    dateData.dateWeek = weekday[dayjs().day()];
-  }, 1000);
-};
-timeFn()
-</script>
-
 <template>
   <div class="d-flex jc-center title_wrap">
     <div class="zuojuxing"></div>
@@ -29,18 +5,44 @@ timeFn()
     <div class="guang"></div>
     <div class="d-flex jc-center">
       <div class="title">
-        <span class="title-text">HIS 戰情看板</span>
+        <span class="title-text">戰情資訊儀表</span>
       </div>
     </div>
     <div class="timers">
-      {{ dateData.dateYear }} {{ dateData.dateWeek }} {{ dateData.dateDay }}
+      <!-- {{ dateData.dateYear }} -->
+      {{ dateData.dateWeek }}
+      {{ dateData.dateDay }}
 
-      <div class="setting_icon"   @click="setSettingShow(true)">
-          <img src="@/assets/img/headers/setting.png" alt="设置">
+      <div class="setting_icon" @click="setSettingShow(true)">
+        <img src="@/assets/img/headers/setting.png" alt="設定" />
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { reactive } from "vue";
+import dayjs from "dayjs";
+import type { DateDataType } from "./index.d";
+import { useSettingStore } from "@/stores/index";
+
+const dateData = reactive<DateDataType>({
+  dateDay: "",
+  // dateYear: "",
+  dateWeek: "",
+  timing: null,
+});
+
+const { setSettingShow } = useSettingStore();
+const weekday = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+const timeFn = () => {
+  dateData.timing = setInterval(() => {
+    dateData.dateDay = dayjs().format("YYYY-MM-DD hh : mm : ss");
+    dateData.dateWeek = weekday[dayjs().day()];
+  }, 1000);
+};
+timeFn();
+</script>
 
 <style scoped lang="scss">
 .title_wrap {
@@ -91,7 +93,7 @@ timeFn()
       height: 20px;
       cursor: pointer;
       margin-left: 12px;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
@@ -114,9 +116,9 @@ timeFn()
     width: 100%;
     background: linear-gradient(
       92deg,
-      #0072ff 0%,
-      #00eaff 48.8525390625%,
-      #01aaff 100%
+      #467C8C 0%,
+      #2cf7fe 48.8525390625%,
+      #75D0E6 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -5,6 +5,7 @@ import LeftCenter from "./left-center.vue";
 import LeftBottom from "./left-bottom.vue";
 import CenterMap from "./center-map.vue";
 import CenterPortal from "./center-portal.vue";
+import CenterTop from "./center-top.vue"
 import CenterBottom from "./center-bottom.vue";
 import RightTop from "./right-top.vue";
 import RightCenter from "./right-center.vue";
@@ -33,9 +34,13 @@ import RightBottom from "./right-bottom.vue";
       </ItemWrap>
     </div>
     <div class="contetn_center">
-
       <!-- <CenterMap class="contetn_center_top" title="设备分布图" /> -->
-      <CenterPortal class="contetn_center_top" title="入口" />
+      <!-- <CenterPortal class="contetn_center_top" title="入口" /> -->
+       
+      <ItemWrap class="contetn_center_top" title="關鍵指標">
+        <CenterTop />
+      </ItemWrap>
+
       <ItemWrap class="contetn_center-bottom" title="門診資訊">
         <CenterBottom />
       </ItemWrap>
@@ -83,7 +88,10 @@ import RightBottom from "./right-bottom.vue";
   flex-direction: column;
   justify-content: space-around;
   .contetn_center-bottom {
-    height: 315px;
+    height: 310px;
+  }
+  .contetn_center_top {
+    margin: 8px 0;
   }
 }
 

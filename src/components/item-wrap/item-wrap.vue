@@ -15,14 +15,17 @@ const props = withDefaults(
   <BorderBox13>
     <div class="item_title" v-if="title !== ''">
       <div class="zuo"></div>
-      <span class="title-inner"> &nbsp;&nbsp;{{ title }}&nbsp;&nbsp; </span>
+      <span class="title-inner" onclick="console.log('click')">
+        &nbsp;&nbsp;{{ title }}&nbsp;&nbsp;
+      </span>
       <div class="you"></div>
     </div>
     <div
       :class="title !== '' ? 'item_title_content' : 'item_title_content_def'"
     >
-      <slot></slot></div
-  ></BorderBox13>
+      <slot />
+    </div>
+  </BorderBox13>
 </template>
 
 <style scoped lang="scss">
@@ -52,23 +55,24 @@ $item_title_content-height: calc(100% - 38px);
     transform: rotate(180deg);
   }
   .title-inner {
+    cursor: pointer;
     font-weight: 900;
     letter-spacing: 2px;
     background: linear-gradient(
       92deg,
-      #0072ff 0%,
-      #00eaff 48.8525390625%,
-      #01aaff 100%
+      #467c8c 0%,
+      #2cf7fe 48.8525390625%,
+      #75d0e6 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
 
-:deep(.dv-border-box-content)  {
-    box-sizing: border-box;
-    padding: 6px 16px 0px;
-  }
+:deep(.dv-border-box-content) {
+  box-sizing: border-box;
+  padding: 6px 16px 0px;
+}
 
 .item_title_content {
   height: $item_title_content-height;

@@ -14,7 +14,8 @@ const props = defineProps({
     default: "transparent",
   },
 });
-const defaultColor = ["#6586ec", "#2cf7fe"];
+const defaultColor = ["#467C8C", "#2cf7fe"];
+// const defaultColor = ["red", "red"];
 const domRef = ref(null);
 const { width, height } = useElementSize(domRef,{width:0,height:0}, { box: 'border-box' });
 const mergedColor = computed<[string, string]>(() => {
@@ -43,7 +44,7 @@ const mergedColor = computed<[string, string]>(() => {
         stroke-width="3"
         stroke-linecap="round"
         stroke-dasharray="10, 5"
-        :stroke="mergedColor[0]"
+        :stroke="mergedColor[1]"
         :d="`M 16 9 L 61 9`"
       />
 
